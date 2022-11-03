@@ -32,21 +32,20 @@ int main(int, char*[])
   // This creates a polygonal cylinder model with eight circumferential facets
   // (i.e, in practice an octagonal prism).
   vtkNew<vtkCylinderSource> cylinder;
-  cylinder->SetResolution(8);
+  cylinder->SetResolution( 8 );
 
   // The mapper is responsible for pushing the geometry into the graphics
   // library. It may also do color mapping, if scalars or other attributes are
   // defined.
   vtkNew<vtkPolyDataMapper> cylinderMapper;
-  cylinderMapper->SetInputConnection(cylinder->GetOutputPort());
+  cylinderMapper->SetInputConnection( cylinder->GetOutputPort() );
 
   // The actor is a grouping mechanism: besides the geometry (mapper), it
   // also has a property, transformation matrix, and/or texture map.
   // Here we set its color and rotate it around the X and Y axes.
   vtkNew<vtkActor> cylinderActor;
-  cylinderActor->SetMapper(cylinderMapper);
-  cylinderActor->GetProperty()->SetColor(
-      colors->GetColor4d("Tomato").GetData());
+  cylinderActor->SetMapper( cylinderMapper );
+  cylinderActor->GetProperty()->SetColor( colors->GetColor4d("Tomato").GetData() );
   cylinderActor->RotateX(30.0);
   cylinderActor->RotateY(-45.0);
 
@@ -54,7 +53,7 @@ int main(int, char*[])
   // which is then displayed on the render window.
   // It can be thought of as a scene to which the actor is added
   vtkNew<vtkOpenVRRenderer> renderer;									// Change to OpenVR version
-  renderer->AddActor(cylinderActor);
+  renderer->AddActor( cylinderActor );
   renderer->SetBackground(colors->GetColor3d("BkgColor").GetData());
   
   // Create Open VR Camera
@@ -64,6 +63,7 @@ int main(int, char*[])
   // The render window is the actual GUI window
   // that appears on the computer screen
   vtkNew<vtkOpenVRRenderWindow> renderWindow;
+  renderWindow->Initialize();
   renderWindow->SetSize(300, 300);
   renderWindow->AddRenderer(renderer);
   renderWindow->SetWindowName("Cylinder");
@@ -71,12 +71,13 @@ int main(int, char*[])
   // The render window interactor captures mouse events
   // and will perform appropriate camera or actor manipulation
   // depending on the nature of the events.
-  //vtkNew<vtkOpenVRRenderWindowInteractor> renderWindowInteractor;		// Change to OpenVR version
-  //renderWindowInteractor->SetRenderWindow(renderWindow);				// Change to OpenVR version
+  vtkNew<vtkOpenVRRenderWindowInteractor> renderWindowInteractor;		// Change to OpenVR version
+  renderWindowInteractor->SetRenderWindow(renderWindow);				// Change to OpenVR version
+  renderWindowInteractor->Initialize();
 
   // This starts the event loop and as a side effect causes an initial render.
   renderWindow->Render();
-  //renderWindowInteractor->Start();
+  renderWindowInteractor->Start();
 
   return EXIT_SUCCESS;
 }
