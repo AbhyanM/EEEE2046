@@ -16,6 +16,7 @@
 #include <vtkOpenVRRenderWindow.h>				// Change to OpenVR version
 #include <vtkOpenVRRenderWindowInteractor.h>	// Change to OpenVR version
 #include <vtkOpenVRRenderer.h>					// Change to OpenVR version
+#include <vtkOpenVRCamera.h>					// Change to OpenVR version
 
 
 #include <array>
@@ -57,8 +58,8 @@ int main(int, char*[])
   renderer->SetBackground(colors->GetColor3d("BkgColor").GetData());
   
   // Create Open VR Camera
-  //vtkNew<vtkOpenVRCamera> cam;				// This is new
-  //renderer->SetActiveCamera(cam);			// This is new
+  vtkNew<vtkOpenVRCamera> cam;				// This is new
+  renderer->SetActiveCamera(cam);			// This is new
 
   // The render window is the actual GUI window
   // that appears on the computer screen

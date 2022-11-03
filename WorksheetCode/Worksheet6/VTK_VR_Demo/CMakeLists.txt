@@ -26,7 +26,7 @@ endif()
 
 # Prevent a "command line is too long" failure in Windows.
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
-add_executable(vtkexample_vr1 MACOSX_BUNDLE vtk_vr1.cpp )
+add_executable(vtkexample_vr1 MACOSX_BUNDLE vtkvr.cpp )
   target_link_libraries(vtkexample_vr1 PRIVATE ${VTK_LIBRARIES}
 )
 # vtk_module_autoinit is needed
