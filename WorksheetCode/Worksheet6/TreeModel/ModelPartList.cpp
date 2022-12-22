@@ -1,3 +1,12 @@
+/**		@file ModelPartList.h
+  *
+  *		EEEE2046 - Software Engineering & VR Project
+  *
+  *		Template for model part list that will be used to create the trewview.
+  *
+  *		P Evans 2022
+  */
+
 #include "ModelPartList.h"
 #include "ModelPart.h"
 
@@ -60,19 +69,18 @@ QVariant ModelPartList::headerData( int section, Qt::Orientation orientation, in
 
 
 QModelIndex ModelPartList::index(int row, int column, const QModelIndex& parent) const {
-    if( !hasIndex(row, column, parent) )
-        return QModelIndex();
-
     ModelPart* parentItem;
-
-    if( !parent.isValid() )
-        parentItem = rootItem;
+    
+    if( !parent.isValid() || !hasIndex(row, column, parent) )
+        parentItem = rootItem;              // default to selecting root 
     else
         parentItem = static_cast<ModelPart*>(parent.internalPointer());
 
     ModelPart* childItem = parentItem->child(row);
     if( childItem )
         return createIndex(row, column, childItem);
+    
+    
     return QModelIndex();
 }
 
@@ -107,5 +115,32 @@ int ModelPartList::rowCount( const QModelIndex& parent ) const {
 
 ModelPart* ModelPartList::getRootItem() {
     return rootItem; 
+}
+
+
+
+QModelIndex ModelPartList::appendChild(QModelIndex& parent, const QList<QVariant>& data) {      
+    ModelPart* parentPart;
+
+    if (parent.isValid())
+        parentPart = static_cast<ModelPart*>(parent.internalPointer());
+    else {
+        parentPart = rootItem;
+        parent = createIndex(0, 0, rootItem );
+    }
+
+    beginInsertRows( parent, rowCount(parent), rowCount(parent) ); 
+
+    ModelPart* childPart = new ModelPart( data, parentPart );
+
+    parentPart->appendChild(childPart);
+
+    QModelIndex child = createIndex(0, 0, childPart);
+
+    endInsertRows();
+
+    emit layoutChanged();
+
+    return child;
 }
 
