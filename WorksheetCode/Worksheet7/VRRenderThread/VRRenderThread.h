@@ -78,10 +78,6 @@ private:
     vtkSmartPointer<vtkOpenVRRenderer>                  renderer;
     vtkSmartPointer<vtkOpenVRCamera>                    camera;
 
-    /* Use to synchronise passing of data to VR thread */
-    QMutex                                              mutex;      
-    QWaitCondition                                      condition;
-
     /** List of actors that will need to be added to the VR scene */
     vtkSmartPointer<vtkActorCollection>                 actors;
 
@@ -96,7 +92,7 @@ private:
     /* Some variables to indicate animation actions to apply.
      *
      */
-    double rotateX;         /*< Degrees to rotate around X axis (per time-step) */
+    double rotateX;         /**< Degrees to rotate around X axis (per time-step) */
 };
 
 

@@ -150,14 +150,14 @@ void VRRenderThread::run() {
 		interactor->DoOneEvent( window, renderer );
 
 		/* Check to see if enough time has elapsed since last update 
-		 * This looks overcomplicated (and it is, C++ loves to make things unecessarily complicated!) but
+		 * This looks overcomplicated (and it is, C++ loves to make things unnecessarily complicated!) but
 		 * is really just checking if more than 20ms have elaspsed since the last animation step. The 
 		 * complications comes from the fact that numbers representing time on computers don't usually have
 		 * standard second/millisecond units. Because everything is a class in C++, the converion from
 		 * computer units to seconds/milliseconds ends up looking like what you see below.
 		 * 
 		 * My choice of 20ms is arbitrary, if this value is too small the animation calculations could begin to
-		 * interfere with the interator processes and make the simulation unresponsive. If it is too large
+		 * interfere with the interactor processes and make the simulation unresponsive. If it is too large
 		 * the animations will be jerky. Play with the value to see what works best.
 		 */
 		if (std::chrono::duration_cast <std::chrono::milliseconds> (std::chrono::steady_clock::now() - t_last).count() > 20) {
