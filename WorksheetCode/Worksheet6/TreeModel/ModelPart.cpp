@@ -9,8 +9,12 @@
 
 #include "ModelPart.h"
 
-#include <vtkSmartPointer.h>
-#include <vtkDataSetMapper.h>
+
+/* Commented out for now, will be uncommented later when you have
+ * installed the VTK library
+ */
+//#include <vtkSmartPointer.h>
+//#include <vtkDataSetMapper.h>
 
 
 
@@ -91,6 +95,47 @@ int ModelPart::row() const {
     return 0;
 }
 
+void ModelPart::setColour(const unsigned char R, const unsigned char G, const unsigned char B) {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+}
+
+unsigned char ModelPart::getColourR() {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+    return 0;   // needs updating
+}
+
+unsigned char ModelPart::getColourG() {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+    return 0;   // needs updating
+}
+
+
+unsigned char ModelPart::getColourB() {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+    return 0;   // needs updating
+}
+
+
+void ModelPart::setVisible(bool isVisible) {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+}
+
+bool ModelPart::visible() {
+    /* This is a placeholder function that will be used in the next worksheet */
+    
+    /* As the name suggests ... */
+    return false;
+}
 
 void ModelPart::loadSTL( QString fileName ) {
     /* This is a placeholder function that will be used in the next worksheet */
@@ -104,15 +149,15 @@ void ModelPart::loadSTL( QString fileName ) {
     /* 3. Initialise the part's vtkActor and link to the mapper */
 }
 
-vtkSmartPointer<vtkActor> ModelPart::getActor() {
+//vtkSmartPointer<vtkActor> ModelPart::getActor() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* Needs to return a smart pointer to the vtkActor to allow
      * part to be rendered.
      */
-}
+//}
 
-vtkActor* ModelPart::getNewActor() {
+//vtkActor* ModelPart::getNewActor() {
     /* This is a placeholder function that will be used in the next worksheet.
      * 
      * The default mapper/actor combination can only be used to render the part in 
@@ -135,45 +180,7 @@ vtkActor* ModelPart::getNewActor() {
     
 
     /* The new vtkActor pointer must be returned here */
-    return nullptr;
+//    return nullptr;
     
-}
+//}
 
-
-void ModelPart::setColour(const unsigned char R, const unsigned char G, const unsigned char B) {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
-
-unsigned char ModelPart::getColourR() {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
-
-unsigned char ModelPart::getColourG() {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
-
-
-unsigned char ModelPart::getColourB() {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
-
-
-void ModelPart::setVisible(bool isVisible) {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
-
-bool ModelPart::visible() {
-    /* This is a placeholder function that will be used in the next worksheet */
-    
-    /* As the name suggests ... */
-}
