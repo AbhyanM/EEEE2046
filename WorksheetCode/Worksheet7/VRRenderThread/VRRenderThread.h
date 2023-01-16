@@ -41,7 +41,8 @@ public:
     enum {
         END_RENDER,
         ROTATE_X,
-		/* etc */
+        ROTATE_Y,
+        ROTATE_Z
     } Command;
 
 
@@ -56,7 +57,7 @@ public:
     /** This allows actors to be added to the VR renderer BEFORE the VR
       * interactor has been started 
      */
-    void addActorOffline( vtkActor* actor );
+    void addActorOffline(vtkActor* actor);
 
 
     /** This allows commands to be issued to the VR thread in a thread safe way. 
@@ -78,6 +79,10 @@ private:
     vtkSmartPointer<vtkOpenVRRenderer>                  renderer;
     vtkSmartPointer<vtkOpenVRCamera>                    camera;
 
+    /* Use to synchronise passing of data to VR thread */
+    QMutex                                              mutex;      
+    QWaitCondition                                      condition;
+
     /** List of actors that will need to be added to the VR scene */
     vtkSmartPointer<vtkActorCollection>                 actors;
 
@@ -92,7 +97,9 @@ private:
     /* Some variables to indicate animation actions to apply.
      *
      */
-    double rotateX;         /**< Degrees to rotate around X axis (per time-step) */
+    double rotateX;         /*< Degrees to rotate around X axis (per time-step) */
+    double rotateY;         /*< Degrees to rotate around Y axis (per time-step) */
+    double rotateZ;         /*< Degrees to rotate around Z axis (per time-step) */
 };
 
 
